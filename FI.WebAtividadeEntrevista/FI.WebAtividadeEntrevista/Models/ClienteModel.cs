@@ -24,6 +24,7 @@ namespace WebAtividadeEntrevista.Models
         /// <summary>
         /// E-mail
         /// </summary>
+        [Required]
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Digite um e-mail válido!")]
         public string Email { get; set; }
 
@@ -61,13 +62,13 @@ namespace WebAtividadeEntrevista.Models
         /// <summary>
         /// Telefone
         /// </summary>
+        [Required]
         public string Telefone { get; set; }
 
         /// <summary>
         /// CPF
         /// </summary>
-        [Required(ErrorMessage ="O campo CPF é obrigatório!")]
-        
+        [Required]
         public string CPF { get; set; }
     }
 }

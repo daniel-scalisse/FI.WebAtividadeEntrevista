@@ -1,45 +1,48 @@
 ﻿var acaoBenef;
 var idBenef;
 
-function SalvarBenef() {
-    $.ajax({
-        url: acaoBenef == 'I' ? urlIncBenef : urlAltBenef,
-        method: "POST",
-        data: {
-            Id: idBenef,
-            CPF: $('#CPFBenef').val(),
-            Nome: $('#NomeBenef').val(),
-            IdCliente: obj.Id
-        },
-        error:
-            function (r) {
-                if (r.status == 400)
-                    ModalDialog("Ocorreu um erro", r.responseJSON, false);
-                else if (r.status == 500)
-                    ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+$(document).ready(function () {
+    $('#formBenef').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: acaoBenef == 'I' ? urlIncBenef : urlAltBenef,
+            method: "POST",
+            data: {
+                Id: idBenef,
+                CPF: $('#CPFBenef').val(),
+                Nome: $('#NomeBenef').val(),
+                IdCliente: obj.Id
             },
-        success:
-            function (r) {
-                if (r.Ok) {
-                    if (acaoBenef == 'A') {
-                        var trB = document.getElementById("trBenef" + idBenef);
-                        trB.cells[0].innerHTML = r.CPF;
-                        trB.cells[1].innerHTML = $('#NomeBenef').val();
-                        $('#btSalvarBenef').html("Incluir");
-                        acaoBenef = 'I';
+            error:
+                function (r) {
+                    if (r.status == 400)
+                        ModalDialog("Ocorreu um erro", r.responseJSON, false);
+                    else if (r.status == 500)
+                        ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+                },
+            success:
+                function (r) {
+                    if (r.Ok) {
+                        if (acaoBenef == 'A') {
+                            var trB = document.getElementById("trBenef" + idBenef);
+                            trB.cells[0].innerHTML = r.CPF;
+                            trB.cells[1].innerHTML = $('#NomeBenef').val();
+                            $('#btSalvarBenef').html("Incluir");
+                            acaoBenef = 'I';
+                        }
+                        else
+                            AddBenef(r.Id, r.CPF, $('#NomeBenef').val())
+
+                        $('#CPFBenef').val("");
+                        $('#NomeBenef').val("");
+                        idBenef = 0;
                     }
-                    else
-                        AddBenef(r.Id, r.CPF, $('#NomeBenef').val())
 
-                    $('#CPFBenef').val("");
-                    $('#NomeBenef').val("");
-                    idBenef = 0;
+                    ModalDialog(r.Ok ? "Sucesso" : "Ops!", r.Msg, r.Ok);
                 }
-
-                ModalDialog(r.Ok ? "Sucesso" : "Ops!", r.Msg, r.Ok);
-            }
-    });
-}
+        });
+    })
+})
 
 function GetBenefById(id) {
     $.post(urlGetBenef,
