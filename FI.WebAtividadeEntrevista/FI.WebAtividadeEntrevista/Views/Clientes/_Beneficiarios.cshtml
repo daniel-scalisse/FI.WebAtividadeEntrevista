@@ -1,0 +1,47 @@
+﻿<div id="divBenef" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Beneficiários</h4>
+            </div>
+            <div class="modal-body">
+                <form id="formBenef" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="CPFBenef">CPF:</label>
+                                <input required="required" type="text" class="form-control" id="CPFBenef" name="CPFBenef" placeholder="Ex.: 999.999.999-99" maxlength="14">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="NomeBenef">Nome:</label>
+                                <input required="required" type="text" class="form-control" id="NomeBenef" name="NomeBenef" placeholder="Ex.: João" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="bottom">
+                                <label>&nbsp;</label>
+                                <button id="btSalvarBenef" type="button" class="btn btn-sm btn-success" onclick="SalvarBenef();">Incluir</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <table id="tbBenef" class="table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>CPF</th>
+                                <th>Nome</th>
+                                <th colspan="2" class="text-center" style="width:5%">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
